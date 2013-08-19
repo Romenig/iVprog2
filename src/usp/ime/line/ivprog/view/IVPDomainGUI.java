@@ -135,6 +135,8 @@ public class IVPDomainGUI extends DomainGUI {
 	public void update(Observable o, Object arg) {
 		if(o instanceof IVPProgram){
 			updateStrategy(arg);
+		}else {
+			System.out.println(o + " ! "+ arg);
 		}
 	}
 

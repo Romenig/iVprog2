@@ -36,6 +36,12 @@ public class IVPDomainModel extends DomainModel {
 		factory = new DataFactory();
 	}
 	
+	//new actions
+	public void dropCodeComponent(CodeComponent dropComponent, CodeComposite dropTarget, int index, AssignmentState state){
+		dropTarget.addChildToIndex(dropComponent, index);
+		state.setStateChanged(dropTarget);
+	}
+	
 	//########################## AskUser methods ##########################
 	public AskUser createAskUser(AssignmentState state){
 		AskUser askUser = (AskUser) factory.createAskUser();
@@ -251,7 +257,7 @@ public class IVPDomainModel extends DomainModel {
 	}
 	
 	public void addFunctionAChildAtIndex(int index, CodeComponent aChild, Function function, AssignmentState state){
-		function.addChildAtIndex(aChild, index);
+		function.addChildToIndex(aChild, index);
 		state.setStateChanged(function);
 	}
 	

@@ -5,58 +5,17 @@ import java.util.Vector;
 
 import usp.ime.line.ivprog.model.components.datafactory.DataFactoryConstants;
 
-public class Function extends DataObject {
+public class Function extends CodeComposite {
 
 	private String functionName = "";
 	private short returnType = -1;
 	private Vector parameterList = new Vector();
 	private Vector localVariableList = new Vector();
-	private Vector children = new Vector();
 	private Vector referenceList = new Vector();
 	private boolean isMainFunction = false;
 
 	public Function(String name, String description) {
 		super(name, description);
-	}
-
-	/**
-	 * Put a child at the specified position.
-	 * 
-	 * @param aChild
-	 * @param index
-	 */
-	public void addChildAtIndex(CodeComponent aChild, int index) {
-		children.add(index, aChild);
-	}
-
-	/**
-	 * Remove the child from the specified position.
-	 * 
-	 * @param index
-	 */
-	public CodeComponent removeChildFromIndex(int index) {
-		CodeComponent component = (CodeComponent) children.get(index);
-		children.remove(index);
-		return component;
-	}
-	
-	/**
-	 * Returns the function child at the specified index.
-	 * @param index
-	 * @return
-	 */
-	public CodeComponent getChildAtIndex(int index){
-		CodeComponent component = (CodeComponent) children.get(index);
-		return component;
-	}
-	
-	/**
-	 * Returns a vector containing all children of this component.
-	 * @return
-	 */
-	
-	public Vector getChildrenList(){
-		return children;
 	}
 
 	/**
@@ -114,25 +73,6 @@ public class Function extends DataObject {
 	 */
 	public void setLocalVariableList(Vector localVarList) {
 		localVariableList = localVarList;
-	}
-
-	/**
-	 * Return the children vector.
-	 * 
-	 * @return the children
-	 */
-	public Vector getChildren() {
-		return children;
-	}
-
-	/**
-	 * Set the children vector.
-	 * 
-	 * @param childrenVector
-	 *            the children to set
-	 */
-	public void setChildren(Vector childrenVector) {
-		children = childrenVector;
 	}
 
 	/**
@@ -303,8 +243,8 @@ public class Function extends DataObject {
 			str += ((DataObject) referenceList.get(i)).toXML();
 		}
 		str += "</referencelist><children>";
-		for (int i = 0; i < children.size(); i++) {
-			str += ((DataObject) children.get(i)).toXML();
+		for (int i = 0; i < getChildrenList().size(); i++) {
+			str += ((DataObject) getChildrenList().get(i)).toXML();
 		}
 		str += "</children></dataobject>";
 		return str;

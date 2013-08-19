@@ -3,7 +3,7 @@ package usp.ime.line.ivprog.model.components.datafactory.dataobjetcs;
 import ilm.framework.assignment.model.DomainObject;
 import usp.ime.line.ivprog.model.components.datafactory.DataFactoryConstants;
 
-public abstract class Reference extends DataObject {
+public abstract class Reference extends CodeComponent {
 
 	protected String referencedName = "";
 	protected short referenceType = -1;

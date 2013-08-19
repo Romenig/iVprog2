@@ -12,7 +12,10 @@ import java.util.Observer;
 
 import usp.ime.line.ivprog.controller.IVPEventController;
 import usp.ime.line.ivprog.model.components.datafactory.dataobjetcs.CodeComponent;
+import usp.ime.line.ivprog.model.components.datafactory.dataobjetcs.CodeComposite;
+import usp.ime.line.ivprog.model.components.datafactory.dataobjetcs.DataObject;
 import usp.ime.line.ivprog.model.components.datafactory.dataobjetcs.Function;
+import usp.ime.line.ivprog.model.domain.actions.ForNewObject;
 
 public class IVPProgram extends Observable implements Observer
 {
@@ -27,6 +30,20 @@ public class IVPProgram extends Observable implements Observer
 		preDefinedFunctionList = new HashMap();
 	}
 	
+	//####################### DOMAIN ACTIONS ##########################
+	public void addChild(DataObject dropComponent, DataObject dropTarget,	int index) {
+		CodeComponent cComponent = null;
+		CodeComposite cComposite = null;
+		if(dropTarget instanceof CodeComposite && dropComponent instanceof CodeComponent){ //accepts drop
+			cComposite = (CodeComposite) dropTarget;
+			cComponent = (CodeComponent) dropComponent;
+			//cComposite.addChildToIndex(cComponent, index); have to be made with DomainAction!
+			actionList.get("dropComponent");
+		} else {
+			//launch exception
+		}
+	}
+
 	
 	//####################### PROCESSING DROP EVENT ##########################
 	private boolean isHolding = false;
@@ -103,6 +120,14 @@ public class IVPProgram extends Observable implements Observer
 	public void setActionList(HashMap actionList) {
 		this.actionList = actionList;
 	}
+
+	public void createNewFor() {
+		ForNewObject fNO = (ForNewObject) actionList.get("fornewobject");
+		fNO.execute();
+	}
+
+
+
 
 
 

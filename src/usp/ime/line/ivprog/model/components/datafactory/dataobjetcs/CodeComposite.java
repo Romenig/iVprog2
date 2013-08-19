@@ -75,4 +75,5 @@ public abstract class CodeComposite extends CodeComponent {
 	public boolean equals(DomainObject o) {
 		return ((DataObject) o).getUniqueID() == this.getUniqueID();
 	}
+
 }

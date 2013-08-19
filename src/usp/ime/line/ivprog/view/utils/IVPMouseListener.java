@@ -6,6 +6,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JComponent;
 
 import usp.ime.line.ivprog.controller.IVPEventController;
+import usp.ime.line.ivprog.model.components.datafactory.dataobjetcs.For;
 import usp.ime.line.ivprog.view.IVPDomainGUI;
 import usp.ime.line.ivprog.view.constants.CommonNames;
 import usp.ime.line.ivprog.view.editor.IVPCanvas;
@@ -48,20 +49,22 @@ public class IVPMouseListener implements MouseListener {
 		private void processClickOnMiniPanel(MouseEvent e){
 			CodeMiniPanel cMP= (CodeMiniPanel) e.getSource();
 			if(cMP.getClassName().equals(CommonNames.FOR_MINI)){
-				holdingComponent = new ForBlock();
+				IVPEventController.createNewFor();
 				isHolding = true;
 			} else if(cMP.getClassName().equals(CommonNames.WHILE_MINI)){
-				
+				isHolding = true;
 			} else if(cMP.getClassName().equals(CommonNames.IFELSE_MINI)){
-				
+				isHolding = true;
 			} else if(cMP.getClassName().equals(CommonNames.PRINT_MINI)){
-				
+				isHolding = true;
 			}
 		}
 		
 		//############################### Drop on canvas #################
 		private static void processClickOnCanvas(MouseEvent e){
+			System.out.println("Canvas > ");
 			IVPCanvas canvas = (IVPCanvas) e.getSource();
+			
 		}
 		
 		public JComponent getHoldingComponent() {

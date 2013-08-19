@@ -35,6 +35,7 @@ public class CodeMiniPanel extends CodeBaseGUI {
         this.className = className;
         labelText = text;
         setLabelText(labelText);
+        addMouseListener(IVProg2.getMouseListener());
     }
 
     private void initContainer() {
