@@ -9,6 +9,7 @@ import usp.ime.line.ivprog.model.components.datafactory.dataobjetcs.CodeComposit
 import usp.ime.line.ivprog.view.constants.CommonNames;
 import usp.ime.line.ivprog.view.editor.codeblocks.CodeBaseGUI;
 import usp.ime.line.ivprog.view.interfaces.CatchableObject;
+import usp.ime.line.ivprog.view.interfaces.ViewDomainObject;
 import usp.ime.line.ivprog.view.utils.language.ResourceBundleIVP;
 
 import java.awt.Color;

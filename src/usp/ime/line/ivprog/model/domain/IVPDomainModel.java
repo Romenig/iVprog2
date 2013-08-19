@@ -42,6 +42,10 @@ public class IVPDomainModel extends DomainModel {
 		state.setStateChanged(dropTarget);
 	}
 	
+	public void removeCodeComponent(CodeComposite dropTarget, int index,
+			AssignmentState _currentState) {
+	}
+	
 	//########################## AskUser methods ##########################
 	public AskUser createAskUser(AssignmentState state){
 		AskUser askUser = (AskUser) factory.createAskUser();
@@ -715,5 +719,7 @@ public class IVPDomainModel extends DomainModel {
 			AssignmentState expectedAnswer) {
 		return 0;
 	}
+
+
 
 }

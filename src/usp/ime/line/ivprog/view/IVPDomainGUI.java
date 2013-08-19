@@ -6,11 +6,13 @@ import java.util.Vector;
 
 import ilm.framework.domain.DomainGUI;
 import ilm.framework.domain.DomainModel;
+
 import javax.swing.JLabel;
 
 import usp.ime.line.ivprog.IVProg2;
 import usp.ime.line.ivprog.controller.IVPEventController;
 import usp.ime.line.ivprog.model.components.datafactory.dataobjetcs.CodeComponent;
+import usp.ime.line.ivprog.model.components.datafactory.dataobjetcs.DataObject;
 import usp.ime.line.ivprog.model.components.datafactory.dataobjetcs.For;
 import usp.ime.line.ivprog.model.components.datafactory.dataobjetcs.Function;
 import usp.ime.line.ivprog.model.domain.IVPProgram;
@@ -122,29 +124,37 @@ public class IVPDomainGUI extends DomainGUI {
 	private IVPMenu menu = null;
 	private IVPMouseListener ivpML;
 	private IVPProgram program = null;
-	private GUIRenderer guiRenderer = null;
+	private DomainRenderer guiRenderer = null;
 	
 	public IVPDomainGUI() {
 		setLayout(new BorderLayout(0, 0));
 		ivpML = IVProg2.getMouseListener();
 		IVPEventController.setDomainGUI(this);
 		addMouseListener(ivpML);
-		guiRenderer = new GUIRenderer();
+		guiRenderer = new DomainRenderer();
 	}
 
 	public void update(Observable o, Object arg) {
 		if(o instanceof IVPProgram){
+			System.out.println("Vem do programa ---------------- ");
 			updateStrategy(arg);
+			System.out.println("--------------------------------");
 		}else {
-			System.out.println(o + " ! "+ arg);
+			System.out.println("Vem do ass state");
 		}
 	}
 
-	private void updateStrategy(Object arg) {
-		if(arg instanceof Function){
-			Function f = (Function) arg;
+	private void updateStrategy(Object domainObject) {
+		if(domainObject instanceof Function){
+			Function f = (Function) domainObject;
 			IVPFunctionBody function = guiRenderer.buildFunction(f);
 			editor.updateFunction(function);
+		} else if(domainObject instanceof CodeComponent){
+			if(((CodeComponent) domainObject).getEscope() == null){
+				guiRenderer.buildNewComponent((DataObject) domainObject);
+			} else {
+				guiRenderer.rebuildComponent((DataObject) domainObject);
+			}
 		}
 	}
 

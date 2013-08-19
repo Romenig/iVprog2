@@ -17,62 +17,62 @@ import usp.ime.line.ivprog.model.components.datafactory.dataobjetcs.DataObject;
 import usp.ime.line.ivprog.model.components.datafactory.dataobjetcs.Function;
 import usp.ime.line.ivprog.model.domain.actions.ForNewObject;
 
-public class IVPProgram extends Observable implements Observer
-{
-	
+public class IVPProgram extends Observable implements Observer {
+
 	private HashMap functionList;
 	private HashMap preDefinedFunctionList;
 	private HashMap actionList;
-	
-	public IVPProgram (){
+
+	public IVPProgram() {
 		IVPEventController.setIVPProgam(this);
 		functionList = new HashMap();
 		preDefinedFunctionList = new HashMap();
 	}
-	
-	//####################### DOMAIN ACTIONS ##########################
-	public void addChild(DataObject dropComponent, DataObject dropTarget,	int index) {
+
+	// ####################### DOMAIN ACTIONS ##########################
+	public void createNewFor() {
+		ForNewObject fNO = (ForNewObject) actionList.get("fornewobject");
+		fNO.execute();
+	}
+
+	public void addChild(DataObject dropComponent, DataObject dropTarget,
+			int index) {
 		CodeComponent cComponent = null;
 		CodeComposite cComposite = null;
-		if(dropTarget instanceof CodeComposite && dropComponent instanceof CodeComponent){ //accepts drop
+		if (dropTarget instanceof CodeComposite
+				&& dropComponent instanceof CodeComponent) { // accepts drop
 			cComposite = (CodeComposite) dropTarget;
 			cComponent = (CodeComponent) dropComponent;
-			//cComposite.addChildToIndex(cComponent, index); have to be made with DomainAction!
+			// cComposite.addChildToIndex(cComponent, index); have to be made
+			// with DomainAction!
 			actionList.get("dropComponent");
 		} else {
-			//launch exception
+			// launch exception
 		}
 	}
 
-	
-	//####################### PROCESSING DROP EVENT ##########################
+	// ####################### PROCESSING DROP EVENT ##########################
 	private boolean isHolding = false;
 	private CodeComponent holdingComponent = null;
 	private int dropIndex = -1;
-	
-	
-	//#######################  ##########################
-	
+
+	// ####################### ##########################
 	public void update(Observable assignmentState, Object domainObject) {
-		if(domainObject instanceof CodeComponent){
-			CodeComponent component = (CodeComponent) domainObject;
-			if(component.getEscope() == null){
-				isHolding = true;
-				holdingComponent = component;
-			} else {
-				notifyObservers(component.getEscope());
-			}
-		} else if(domainObject instanceof Function){
+		if (domainObject instanceof Function) {
 			Function f = (Function) domainObject;
-			if(!functionList.containsKey(f.getFunctionName())){
+			if (!functionList.containsKey(f.getFunctionName())) {
 				functionList.put(f.getFunctionName(), f);
 			}
 			setChanged();
 			notifyObservers(domainObject);
+		} else if (domainObject instanceof CodeComponent) {
+			CodeComponent component = (CodeComponent) domainObject;
+			setChanged();
+			notifyObservers(component);
 		}
 	}
 
-	//####################### ALL GETTERS/SETTERS ##########################
+	// ####################### ALL GETTERS/SETTERS ##########################
 	public HashMap getFunctionList() {
 		return functionList;
 	}
@@ -88,7 +88,7 @@ public class IVPProgram extends Observable implements Observer
 	public void setPreDefinedFunctionList(HashMap preDefinedFunctionList) {
 		this.preDefinedFunctionList = preDefinedFunctionList;
 	}
-	
+
 	public boolean isHolding() {
 		return isHolding;
 	}
@@ -120,16 +120,5 @@ public class IVPProgram extends Observable implements Observer
 	public void setActionList(HashMap actionList) {
 		this.actionList = actionList;
 	}
-
-	public void createNewFor() {
-		ForNewObject fNO = (ForNewObject) actionList.get("fornewobject");
-		fNO.execute();
-	}
-
-
-
-
-
-
 
 }

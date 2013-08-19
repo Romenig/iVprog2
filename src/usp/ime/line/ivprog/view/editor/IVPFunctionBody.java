@@ -42,8 +42,8 @@ public class IVPFunctionBody extends JPanel implements ViewDomainObject{
 		add(scrollPane, BorderLayout.CENTER);
 	}
 	
-	public void addToCanvas(JComponent comp){
-		canvas.addComponentToCanvas((CatchableObject) comp);
+	public void addToCanvas(ViewDomainObject component){
+		canvas.addComponentToCanvas((CatchableObject) component);
 	}
 
 	public String getFunctionName() {

@@ -13,11 +13,12 @@ import usp.ime.line.ivprog.view.editor.IVPCanvas;
 import usp.ime.line.ivprog.view.editor.codeblocks.CodeMiniPanel;
 import usp.ime.line.ivprog.view.editor.codeblocks.ForBlock;
 import usp.ime.line.ivprog.view.interfaces.CatchableObject;
+import usp.ime.line.ivprog.view.interfaces.ViewDomainObject;
 
 public class IVPMouseListener implements MouseListener {
 	
 	private boolean isHolding = false;
-	private JComponent holdingComponent = null;
+	private ViewDomainObject holdingComponent = null;
 	
 	//################################## MOUSE LISTENER METHODS ########################
 	public void mouseClicked(MouseEvent e) {}
@@ -62,15 +63,15 @@ public class IVPMouseListener implements MouseListener {
 		
 		//############################### Drop on canvas #################
 		private static void processClickOnCanvas(MouseEvent e){
-			System.out.println("Canvas > ");
 			IVPCanvas canvas = (IVPCanvas) e.getSource();
-			
+			int index = canvas.getDropIndex(e.getY());
 		}
 		
-		public JComponent getHoldingComponent() {
+		public ViewDomainObject getHoldingComponent() {
 			return holdingComponent;
 		}
-		public void setHoldingComponent(JComponent holdingComponent) {
+		
+		public void setHoldingComponent(ViewDomainObject holdingComponent) {
 			this.holdingComponent = holdingComponent;
 		}
 
