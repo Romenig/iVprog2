@@ -121,7 +121,6 @@ public class IVPDomainGUI extends DomainGUI {
 	
 	private boolean isMainSet = false;
 	private IVPEditor editor = null;
-	private IVPMenu menu = null;
 	private IVPMouseListener ivpML;
 	private IVPProgram program = null;
 	private DomainRenderer guiRenderer = null;
@@ -160,9 +159,7 @@ public class IVPDomainGUI extends DomainGUI {
 
 	protected void initDomainGUI() {
 		editor = new IVPEditor();
-		menu = new IVPMenu();
 		add(editor, BorderLayout.CENTER);
-		add(menu, BorderLayout.WEST);
 		initProgram();
 		FunctionCreateMain fCM =  (FunctionCreateMain) _actionList.get("functioncreatemain");
 		fCM.execute();

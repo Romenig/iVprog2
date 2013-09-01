@@ -14,11 +14,24 @@ import usp.ime.line.ivprog.view.editor.codeblocks.CodeMiniPanel;
 import usp.ime.line.ivprog.view.interfaces.CatchableObject;
 import usp.ime.line.ivprog.view.interfaces.ViewDomainObject;
 
-public abstract class IVPEventController {
+public class IVPEventController {
 
+	//begin - Singleton
+	private static IVPEventController instance = null;
+
+	public static IVPEventController getInstance(){
+		if(instance != null)
+			return instance;
+		else
+			instance = new IVPEventController();
+		return instance;
+	}
+
+	//end - Singleton
+	
 	private static IVPDomainGUI domainGUI = null;
 	private static IVPProgram program = null;
-
+	
 	public static void setDomainGUI(IVPDomainGUI dGUI) {
 		domainGUI = dGUI;
 	}
@@ -34,5 +47,7 @@ public abstract class IVPEventController {
 	public static void createNewFor() {
 		program.createNewFor();
 	}
+	
+	
 
 }

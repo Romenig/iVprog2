@@ -45,6 +45,7 @@ import javax.swing.event.ChangeListener;
 import usp.ime.line.ivprog.view.constants.CommonNames;
 import usp.ime.line.ivprog.view.editor.IVPCanvas;
 import usp.ime.line.ivprog.view.editor.codeblocks.CodeMiniPanel;
+import usp.ime.line.ivprog.view.menu.IVPMenu;
 import usp.ime.line.ivprog.view.utils.IVPMouseListener;
 import usp.ime.line.ivprog.view.utils.IconButtonUI;
 import usp.ime.line.ivprog.view.utils.RoundedJPanel;
@@ -59,6 +60,7 @@ import com.l2fprod.common.swing.plaf.windows.WindowsTaskPaneGroupUI;
 import com.l2fprod.common.swing.plaf.windows.WindowsTaskPaneUI;
 
 import java.awt.GridBagConstraints;
+
 import javax.swing.SwingConstants;
 
 public class IVPBaseGUI extends BaseGUI {
@@ -80,6 +82,7 @@ public class IVPBaseGUI extends BaseGUI {
 	private JButton evaluationBtn;
 	private JButton objectBtn;
 	private IVPDomainGUI currentGUI;
+	private IVPMenu ivpMenu = null;
 
 	public IVPBaseGUI() {
 		setLayout(new BorderLayout(0, 0));
@@ -87,9 +90,15 @@ public class IVPBaseGUI extends BaseGUI {
 		initTabbedPane();
 		initFooter();
 		initContent();
+		initMenu();
 		initFrameworkMenu();
 	}
 	
+	private void initMenu() {
+		ivpMenu = new IVPMenu();
+		add(ivpMenu, BorderLayout.WEST);
+	}
+
 	private void initFrameworkMenu() {
 		initFrameworkMenuGroup();
 		initIVPCodeBlocksMenu();
@@ -127,7 +136,6 @@ public class IVPBaseGUI extends BaseGUI {
 		content = new JPanel();
 		add(content, BorderLayout.CENTER);
 		content.setLayout(new BorderLayout(0, 0));
-
 	}
 
 	private void initFooter() {
